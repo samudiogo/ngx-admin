@@ -1,0 +1,49 @@
+<form [formGroup]="resourceForm" (submit)="submitForm()">
+  <div class="card">
+    <div class="card-header text-dark">
+      <strong>{{ "Informações sobre o Projeto" | uppercase }}</strong>
+    </div>
+
+    <div class="card-body">
+      <div class="container">
+        <div class="form-group row">
+          <label for="title" class="col-md-2 col-form-label text-dark"><strong>Titulo</strong></label>
+          <div class="col-md-10">
+            <input type="text" class="form-control" id="title" formControlName="title">
+            <ngx-form-field-error [form-control]="resourceForm.get('title')"></ngx-form-field-error>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="icon" class="col-md-2 col-form-label text-dark"><strong>Icone</strong></label>
+          <div class="col-md-4 input-group input-group-lg">
+            <input type="text" class="form-control" id="icon" #iconeText formControlName="icon">
+            <div class="input-group-append">
+              <span class="input-group-text">
+                <i class="{{ iconeText.value }}"></i>
+              </span>
+            </div>
+          </div>
+          <ngx-form-field-error [form-control]="resourceForm.get('icon')"></ngx-form-field-error>
+        </div>
+        <div class="form-group row">
+          <label class="col-md-2 col-form-label text-dark" for="show_menu"><strong>Exibir projeto no menu</strong></label>
+          <div class="col-md-1 input-group input-group-lg">
+            <div class="input-group-append">
+              <input type="checkbox" [checked]="show_menu" class="form-margin" id="show_menu"
+                formControlName="show_menu">
+            </div>
+          </div>
+        </div>
+      </div>
+      <ngx-server-error-messages [server-error-messages]="serverErrorMessages"></ngx-server-error-messages>
+    </div>
+
+    <div class="card-footer text-right">
+      <div class="btn-group btn-group-sm text-right" role="group">
+        <button [disabled]="submittingForm || resourceForm.invalid" type="submit"
+          class="btn btn-outline-info mr-1">SALVAR</button>
+        <button type="button" (click)="backClicked()" class="btn btn-outline-secondary">VOLTAR</button>
+      </div>
+    </div>
+  </div>
+</form>
