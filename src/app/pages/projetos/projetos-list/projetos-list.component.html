@@ -1,0 +1,38 @@
+<ngx-page-header button-text="NOVO ITEM" button-link="novo" button-class="pointer btn-info btn-outline-info">
+</ngx-page-header>
+
+<div class="card">
+  <div class="card-body">
+      <div class="w-100 text-right" *ngIf="searchTerm !== '' ">
+          <h4>Resultado da busca: "{{ searchTerm | lowercase }}"
+            <button class="ml-5 btn btn-outline-secondary bt-sm" (click)="clearSearch()">Limpar busca</button>
+          </h4>
+        </div>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <caption class="bg-dark text-light pl-2">{{ resources.length }} total</caption>
+        <thead>
+          <tr class="text-uppercase">
+            <th>Icone</th>
+            <th class="w-50">Id</th>
+            <th class="w-50">Titulo</th>
+            <th class="text-center w-25">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of resources" class="">
+            <td class=""><i class="fa-lg {{item.icon }} "></i></td>
+            <td class="">{{ item.id }}</td>
+            <td class="">{{ item.title }}</td>
+            <td class="text-center">
+              <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                <a [routerLink]="[item.id, 'editar']" class="btn btn-outline-info btn-sm mr-2">Editar</a>
+                <button (click)="deleteResourceById(item.id)" class="btn btn-outline-danger btn-sm">Excluir</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
